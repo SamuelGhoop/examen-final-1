@@ -14,7 +14,7 @@ const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
   return (
     <div className="rounded-lg border p-4 shadow">
       <Link to={`/pokemon/${name}`}>
-        <h2 className="text-xl font-bold">{name}</h2>
+        <h2 className="text-2xl centered font-bold text-black-600">{name}</h2>
       </Link>
         <img src={imageUrl} alt={name} />   
 

@@ -13,7 +13,7 @@ interface PokemonAbility {
 }
 
 interface PokemonStats{
-  stats : { stat: number}
+  stats : { stat: string}
 }
 
 interface Pokemon {
@@ -61,12 +61,12 @@ function DragonDetail() {
     pokemon.sprites.front_default;
 
   return (
-    <div className="p-4">
-      <Link to="/" className="text-blue-600 inline-flex items-center gap-2">
+    <div className="rounded-lg border p-4 shadow items-center">
+      <Link to="/" className="text-red-600 inline-flex items-center gap-2">
         <FaArrowLeft /> Volver
       </Link>
 
-      <h1 className="text-3xl font-bold capitalize mt-2">
+      <h1 className="text-6xl font-bold capitalize mt-2">
         #{pokemon.id} {pokemon.name}
       </h1>
 
@@ -77,27 +77,27 @@ function DragonDetail() {
           addFavorite({ name: pokemon.name, url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/` });
         }
       }}>
-        <FaHeart color={isFavorite(pokemon.name) ? "red" : "gray"} />
+        <FaHeart size={50} color={isFavorite(pokemon.name) ? "red" : "gray"} />
       </button>
 
-      <img src={image} alt={pokemon.name} className="w-48 h-48" />
+      <img src={image} alt={pokemon.name} className="w-100 h-100" />
 
-      <p><strong>Altura:</strong> {pokemon.height / 10} m</p>
-      <p><strong>Peso:</strong> {pokemon.weight / 10} kg</p>
+      <p className="text-xl font-bold capitalize mt-2"><strong>Altura:</strong> {pokemon.height / 10} m</p>
+      <p  className="text-xl font-bold capitalize mt-2"><strong>Peso:</strong> {pokemon.weight / 10} kg</p>
 
-      <div>
+      <div className="text-xl font-bold capitalize mt-2 items-center" >
         <strong>Tipos:</strong>{" "}
         {pokemon.types.map((t) => t.type.name).join(", ")}
       </div>
 
-      <div>
+      <div className="text-xl font-bold capitalize mt-2 items-center">
         <strong>Habilidades:</strong>{" "}
         {pokemon.abilities.map((a) => a.ability.name).join(", ")}
       </div>
-      <div>
+      {/* <div>
         <strong>Estadisticas:</strong>{" "}
         {pokemon.stats.map((a) => a.stats.stat).join(", ")}
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import EmptyState from "../components/EmptyState";
 import SearchBar from "../components/SearchBar";
 import DragonCard from "../components/DragonCard";
 import DragonList from "../components/DragonList";
+import { CgPokemon } from "react-icons/cg";
 
 interface Pokemon {
  name: string,
@@ -41,9 +42,10 @@ useEffect(() => {
 }, []);
   return (
     <div className="p-4">
-      <h1 className="text-5xl centered font-bold text-red-600">
-        Los primeros 151 pokemon
+      <h1 className="text-5xl font-bold text-red-600 inline-flex items-center">
+        Los primeros 151 pokemon <CgPokemon></CgPokemon>
       </h1>
+      
        {loading && <Loader />}
       {!loading && error && <ErrorMessage message={error} onRetry={loadPokemon} />}
       {!loading && !error && pokemon.length === 0 && <EmptyState message="No se encontraron Pokemon" />}
