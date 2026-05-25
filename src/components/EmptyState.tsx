@@ -1,3 +1,11 @@
-export default function EmptyState() {
-    return <p className="text-center">No se encontraron Pokemons.</p>
+interface Props {
+  message: string;
 }
+function EmptyState({ message }: Props) {
+  return (
+    <div>
+      <p>{message}</p>
+    </div>
+  );
+}
+export default EmptyState;

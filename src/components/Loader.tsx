@@ -1,3 +1,11 @@
-export default function Loader() {
-    return <p className="text-center">Cargando pokemon...</p>
+import { FaSpinner } from "react-icons/fa";
+
+function Loader() {
+  return (
+    <div>
+      <FaSpinner className="animate-spin" />
+      <p>Cargando...</p>
+    </div>
+  );
 }
+export default Loader;
