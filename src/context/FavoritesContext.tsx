@@ -1,38 +1,48 @@
-import { createContext, useContext, useState } from 'react'
+  import { createContext,useContext,useState } from "react";
+import DragonCard from "../components/DragonCard";
 
-const FavoritesContext = createContext(null)
+  interface Pokemon{
+      name: string,
+      url: string
+  }
 
-export function FavoritesProvider({ children }) {
-  const [favorites, setFavorites] = useState([])
+  interface FavoritesContextType{
+      favorites : Pokemon[]
+      addFavorite : (pokemon : Pokemon) => void            
+      removeFavorite : (pokemonId : string) => void
+      isFavorite : (pokemonId : string) => boolean
+  }
 
-  // TODO: Implementar función addFavorite(dragon)
-  // - Si el dragón ya está en favoritos, no hacer nada
-  // - Agregar el dragón al array de favoritos
+  const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
 
-  // TODO: Implementar función removeFavorite(dragonName)
-  // - Filtrar el dragón del array por nombre
+  export function FavoritesProvider({ children }: { children: React.ReactNode }) {
+    const [favorites, setFavorites] = useState<Pokemon[]>([]);
 
-  // TODO: Implementar función isFavorite(dragonName)
-  // - Retornar true si el dragón ya está en favoritos
+    function addFavorite(pokemon: Pokemon) {
+      setFavorites(prev => {
+        if (prev.some(f => f.name === pokemon.name)) return prev; //Si ya está no lo duplica
+        return [...prev, pokemon]; 
+      });
+    }
 
-  const value = {
-    favorites,
-    // addFavorite,     // ← reemplazar con función real
-    // removeFavorite,  // ← reemplazar con función real
-    // isFavorite,      // ← reemplazar con función real
+  function removeFavorite(pokemonName: string){
+    setFavorites(prev => prev.filter(f => f.name !== pokemonName))
+  }
+
+  function isFavorite(pokemonName : string){
+    return favorites.some(f => f.name === pokemonName)
   }
 
   return (
-    <FavoritesContext.Provider value={value}>
-      {children}
-    </FavoritesContext.Provider>
-  )
-}
 
-export function useFavorites() {
-  const context = useContext(FavoritesContext)
-  if (!context) {
-    throw new Error('useFavorites debe usarse dentro de FavoritesProvider')
+  <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, isFavorite }}>
+        {children}
+      </FavoritesContext.Provider>
+    );
   }
-  return context
-}
+
+  export function useFavorites() {
+    const context = useContext(FavoritesContext);
+    if (!context) throw new Error("useFavorites debe usarse dentro de FavoritesProvider");
+    return context;
+  }
