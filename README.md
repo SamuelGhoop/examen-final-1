@@ -1,6 +1,7 @@
-# DragonDex - Examen Final
-
+# PokeDex - Examen Final
+Samuel Giraldo Jimenez 1038868860
 Catálogo de dragones usando PokéAPI.
+Maneje los dragones como Pokemon
 
 ## Instalación
 1. Clonar el repositorio
